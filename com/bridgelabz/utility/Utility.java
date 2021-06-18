@@ -1,3 +1,11 @@
+/* ****************************
+ * Purpose: To store all logic of the programs
+ *
+ * @author Piyush Shaw
+ * @version 1.0
+ * @since 17-06-2021
+ *  ***************************/
+
 package com.bridgelabz.utility;
 
 import java.io.BufferedReader;
@@ -335,6 +343,56 @@ public static void writeFile(String word[], String filePath) {
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}
+}
+public static void fillArray(String[][] days, int month, int year) {
+	// TODO Auto-generated method stub
+	int daysInMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int dayCount = 1;
+	String weekDays[] = { "S", "M", "T", "W", "Th", "F", "Sa" };
+	int startDay = dayOfWeek(1, month, year);
+	int j = 0;
+	if (isLeapYear(year)) {
+		daysInMonth[2] = 29;
+	}
+	for (int i = 0; i < 7; i++) {
+		days[j][i] = weekDays[i];
+	}
+
+	for (int i = 1; i < 7; i++) {
+		for (j = 0; j < 7; j++)
+			if (startDay >= dayCount) {
+				days[i][j] = " ";
+				startDay--;
+
+			} else if (dayCount <= daysInMonth[month]) {
+				days[i][j] = String.valueOf(dayCount);
+				dayCount++;
+			} else {
+				days[i][j] = " ";
+			}
+	}
+}
+
+private static boolean isLeapYear(int year) {
+	// TODO Auto-generated method stub
+	return false;
+}
+private static int dayOfWeek(int i, int month, int year) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+public static void printCalender(String[][] days, int month, int year) {
+	// TODO Auto-generated method stub
+	String months[] = { "January", "February", "March", "April", "May",
+			"June", "July", "August", "September", "October", "November",
+			"December" };
+	System.out.println(months[month - 1] + "\t" + year);
+	for (int i = 0; i < 7; i++) {
+		for (int j = 0; j < 7; j++) {
+			System.out.print(days[i][j] + "\t");
+		}
+		System.out.println();
 	}
 }
 }
